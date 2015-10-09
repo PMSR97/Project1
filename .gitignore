@@ -1,57 +1,42 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
+def mandatos(nr_mandatos,nr_votos):
+    contador=1
+    nr_candidaturas=len(nr_votos)
+    i=0
+    res= ()
+    lista=listar(nr_votos)
+    comprimento=len(nr_votos)
+    lista_resultado=[0]*comprimento
+    while contador<=nr_mandatos:
+        maximo=maxini(lista)
+        while lista[i][0]!=maximo:
+            i=i+1
+        lista_resultado[i]=lista_resultado[i]+1
+        lista[i][0]=(lista[i][0]*lista[i][1])/(lista[i][1]+1)
+        lista[i][1]=lista[i][1]+1
+        contador=contador+1
+        i=i*0
+    
+    return tuple(lista_resultado)
+        
+        
 
-# C extensions
-*.so
+def maxini(indice_tuplo):
+    i1=0
+    i2=1
+    while i2<len(indice_tuplo):
+        if indice_tuplo[i1][0]>indice_tuplo[i2][0]:
+            i2=i2+1
+        else:
+            i1=i2
+            i2=i2+1
+    return indice_tuplo[i1][0]
 
-# Distribution / packaging
-.Python
-env/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
-
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*,cover
-
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
-*.log
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-target/
+def listar(x):
+    l=0
+    l1=0
+    l2=0
+    lis=[]
+    while l<len(x):
+        lis=lis + [[x[l],1]]
+        l=l+1
+    return lis
